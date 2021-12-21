@@ -1,0 +1,32 @@
+{
+  "name": "challenge-personal-pay-api",
+  "version": "1.0.0",
+  "description": "weather forecast API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArakakiAriel/challenge-personal-pay-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArakakiAriel/challenge-personal-pay-api/issues"
+  },
+  "homepage": "https://github.com/ArakakiAriel/challenge-personal-pay-api#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "body-parser": "^1.19.1",
+    "connect-timeout": "^1.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "express-routemap": "^1.6.0",
+    "http": "0.0.1-security",
+    "lodash": "^4.17.21"
+  }
+}
