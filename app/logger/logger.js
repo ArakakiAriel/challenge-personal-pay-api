@@ -8,7 +8,7 @@ const logger = createLogger({
   format: customFormat,
   transports: [
     new transports.Console({ level: 'silly' }),
-    //new transports.File({ filename: config.log.file_name, level: config.log.level }),
+    new transports.File({ filename: config.log.file_name, level: config.log.level }),
   ],
 });
 

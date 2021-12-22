@@ -1,7 +1,3 @@
-//= ==============
-//    PORT
-//= ==============
-process.env.PORT = process.env.PORT || 3000;
 
 //= ==============
 //    ENVIRONMENT
@@ -10,13 +6,16 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 module.exports = {
   timeouts: {
-    timer_default: process.env.TIMEOUT_TIMER_DEFAULT || 5000,
+    timer_default: process.env.TIMEOUT_TIMER_DEFAULT || 10000,
   },
   url: {
     ipapi: process.env.URL_IPAPI || 'http://ip-api.com/json/',
     owm: process.env.URL_OWM || 'https://api.openweathermap.org/data/2.5',
   },
-  owmApiKey: process.env.OWM_API_KEY || '62d89ffa851fa59bd7e4cd42ba9b796b',
+  owm: {
+      current: process.env.OWM_CURRENT || 'weather',
+      forecast: process.env.OWM_FORECAST || 'forecast'
+  },
   log: {
     level: 'debug',
     file_name: 'app.log',
