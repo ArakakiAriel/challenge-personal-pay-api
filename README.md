@@ -21,24 +21,10 @@ API de pronóstico del tiempo
     //Inicializa el API
     npm start
 ```
-3. Recordar que para ejecutar los endpoints de manera local se debe agregar el header "x-forwarded-for" con una IP válida.
+3. Recordar que para ejecutar los endpoints de manera local se debe agregar el header "x-forwarded-for" con un valor de IP válida.
 
 ## SWAGGER
-- Podremos ver el swagger en el siguiente link: http://localhost:3000/api-docs/#/default/get_v1_forecast__city_
-
-## IpApi (https://ipapi.co/api/#complete-location)
-- Ubicación
-    - API CALL: http://ip-api.com/json/{ip}
-
-
-## OpenWeatherMap (https://openweathermap.org/api)
-- Tiempo actual  (https://openweathermap.org/current)
-    - API CALL por ciudad: https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-    - API CALL por coordenadas: https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
-
-- Pronóstico a 5 días (https://openweathermap.org/forecast5)
-    - API CALL por ciudad: https://api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
-    - API CALL por coordenadas: https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+- Podremos ver el swagger en el siguiente link: http://localhost:3000/api-docs/#/default/get_v1_forecast__city_ si lo levantamos de manera local
 
 ## LOGS
 - Actualmente se encuentra configurado en el level debug para poder trackear todo log.
@@ -49,8 +35,7 @@ API de pronóstico del tiempo
         file_name: 'app.log' //nombre del archivo de logs
     }
 ```
-
-### Niveles de log (Más alto a más bajo)
+#### Niveles de log (Más alto a más bajo)
 ```
 {
   error: 0,
@@ -63,10 +48,7 @@ API de pronóstico del tiempo
 }
 ```
 
-
-
 # CALLS POSIBLES
-
 
 ## DE MANERA LOCAL
 - Para poder ejecutar el endpoint levantando el servicio de manera local se debe utilizar el header 'x-forwarded-for' indicandole una IP 
@@ -121,3 +103,25 @@ curl --location --request GET 'https://challenge-personal-pay-api.herokuapp.com/
 ```
 curl --location --request GET 'https://challenge-personal-pay-api.herokuapp.com/v1/forecast/tokyo'
 ```
+
+
+
+
+# APIS EXTERNAS UTILIZADAS
+
+## IpApi (https://ipapi.co/api/#complete-location)
+- Ubicación
+    - API CALL: http://ip-api.com/json/{ip}
+
+## OpenWeatherMap (https://openweathermap.org/api)
+- Tiempo actual  (https://openweathermap.org/current)
+    - API CALL por ciudad: https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+    - API CALL por coordenadas: https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+
+- Pronóstico a 5 días (https://openweathermap.org/forecast5)
+    - API CALL por ciudad: https://api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
+    - API CALL por coordenadas: https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+
+
+
+
