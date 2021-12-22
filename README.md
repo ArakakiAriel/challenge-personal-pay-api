@@ -24,7 +24,7 @@ API de pronóstico del tiempo
 3. Recordar que para ejecutar los endpoints de manera local se debe agregar el header "x-forwarded-for" con un valor de IP válida.
 
 ## SWAGGER
-- Podremos ver el swagger en el siguiente link: http://localhost:3000/api-docs/#/default/get_v1_forecast__city_ si lo levantamos de manera local
+- Podremos ver el swagger en el siguiente link: http://localhost:3000/api-docs (si lo levantamos de manera local)
 
 ## LOGS
 - Actualmente se encuentra configurado en el level debug para poder trackear todo log.
@@ -71,12 +71,12 @@ curl --location --request GET 'http://localhost:3000/v1/current' \
 ```
 #### forecast:city (Pronóstico a 5 días según ciudad)
 ```
-curl --location --request GET 'http://localhost:3000/v1/forecast' \
+curl --location --request GET 'http://localhost:3000/v1/forecast/buenos%20aires' \
 --header 'x-forwarded-for: 123.21.54.5'
 ```
 #### forecast (Pronóstico a 5 días según ip location)
 ```
-curl --location --request GET 'http://localhost:3000/v1/forecast/buenos%20aires' \
+curl --location --request GET 'http://localhost:3000/v1/forecast' \
 --header 'x-forwarded-for: 123.21.54.5'
 ```
 
@@ -85,23 +85,23 @@ curl --location --request GET 'http://localhost:3000/v1/forecast/buenos%20aires'
 
 #### location (Datos a cerca de la ubicación del usuario)
 ```
-curl --location --request GET 'https://challenge-personal-pay-api.herokuapp.com/v1/location'
+curl https://challenge-personal-pay-api.herokuapp.com/v1/location
 ```
 #### current:city (Tiempo actual del clima según ciudad)
 ```
-curl --location --request GET 'https://challenge-personal-pay-api.herokuapp.com/v1/current/buenos%20aires'
+curl https://challenge-personal-pay-api.herokuapp.com/v1/current/buenos%20aires
 ```
 #### current (Tiempo actual del clima según ip location)
 ```
-curl --location --request GET 'https://challenge-personal-pay-api.herokuapp.com/v1/current'
+curl https://challenge-personal-pay-api.herokuapp.com/v1/current
 ```
 #### forecast:city (Pronóstico a 5 días según ciudad)
 ```
-curl --location --request GET 'https://challenge-personal-pay-api.herokuapp.com/v1/forecast'
+curl https://challenge-personal-pay-api.herokuapp.com/v1/forecast/tokyo
 ```
 #### forecast (Pronóstico a 5 días según ip location)
 ```
-curl --location --request GET 'https://challenge-personal-pay-api.herokuapp.com/v1/forecast/tokyo'
+curl https://challenge-personal-pay-api.herokuapp.com/v1/forecast
 ```
 
 
