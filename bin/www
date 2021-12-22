@@ -1,11 +1,9 @@
-const app = require('../app');
-const debug = require('debug')('express:server');
-const http = require('http');
 const displayRoutes = require('express-routemap');
-const logger = require('../logger');
+const http = require('http');
+const app = require('../app');
+const logger = require('../app/logger/logger');
 const config = require('../app/config/config');
-require("dotenv").config({ path: ".env" })
-
+require('dotenv').config({ path: '.env' });
 
 /**
  * Create HTTP server.
@@ -16,19 +14,11 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-// server.listen(port);
 app.listen(process.env.PORT, () => {
-  logger.info("//////////////////////////////////////")
-  logger.info("//       INITIALIZING SERVICE       //")
-  logger.info("//////////////////////////////////////")
-    logger.info("Listening on port " + process.env.PORT);
-    logger.info("LOG LEVEL: " + config.log.level);
-    displayRoutes(app);
-  });
-
-  
-
-
-exports.closeServer = function () {
-  server.close();
-};
+  logger.info('//////////////////////////////////////');
+  logger.info('//       INITIALIZING SERVICE       //');
+  logger.info('//////////////////////////////////////');
+  logger.info(`Listening on port ${process.env.PORT}`);
+  logger.info(`LOG LEVEL: ${config.log.level}`);
+  displayRoutes(app);
+});

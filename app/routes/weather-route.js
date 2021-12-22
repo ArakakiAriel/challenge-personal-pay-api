@@ -1,8 +1,8 @@
-const Router = require('express').Router;
+const { Router } = require('express');
 const timeout = require('connect-timeout');
 const config = require('../config/config');
 const context = require('../../context/default');
-const getMiddlewares = require('../utils/get-middleware').getMiddlewares;
+const { getMiddlewares } = require('../utils/get-middleware');
 
 const router = Router();
 router.get('/location', timeout(`${config.timeouts.timer_default}`), getMiddlewares(context.middlewares.getLocationData));

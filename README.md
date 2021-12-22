@@ -23,7 +23,8 @@ API de pronóstico del tiempo
 ```
 3. Recordar que para ejecutar los endpoints de manera local se debe agregar el header "x-forwarded-for" con una IP válida.
 
-
+## SWAGGER
+- Podremos ver el swagger en el siguiente link: http://localhost:3000/api-docs/#/default/get_v1_forecast__city_
 
 ## IpApi (https://ipapi.co/api/#complete-location)
 - Ubicación
@@ -65,6 +66,7 @@ API de pronóstico del tiempo
 
 
 # CALLS POSIBLES
+
 
 ## DE MANERA LOCAL
 - Para poder ejecutar el endpoint levantando el servicio de manera local se debe utilizar el header 'x-forwarded-for' indicandole una IP 
