@@ -4,7 +4,7 @@ info:
   title: challenge-personal-pay-api
   description: weather and forecast API
 schemes:
-- "http"
+- 'http'
 consumes:
 - application/json
 produces:
@@ -12,7 +12,7 @@ produces:
 paths:
   /v1/location:
     get:
-      summary: "Get the location data of the user by calling IpApi"
+      summary: 'Get the location data of the user by calling IpApi'
       description: Returns location data
       produces:
       - application/json
@@ -20,79 +20,79 @@ paths:
       - in: header
         name: x-forwarded-for
         type: string
-        description: "Description: the user IP.  \n \nExample: (123.21.54.5)"
+        description: 'Description: the user IP.  \n \nExample: (123.21.54.5)'
         required: false
       responses:
         '200':
           description: OK
           schema:
-            $ref: "#/definitions/Response_location_OK"
+            $ref: '#/definitions/Response_location_OK'
         '400':
           description: INVALID QUERY
           schema:
-            $ref: "#/definitions/Response_NOK"
+            $ref: '#/definitions/Response_NOK'
         '500':
           description: SERVER ERROR
           schema:
-            $ref: "#/definitions/Response_NOK"
+            $ref: '#/definitions/Response_NOK'
 
   /v1/current/{city}:
     get:
-      summary: "Get data from IpApi and OpenWeatherMap API"
+      summary: 'Get data from IpApi and OpenWeatherMap API'
       description: Gets current weather of a city
       parameters:
-      - name: "city"
-        in: "path"
-        description: "Description: A city name.  \n \nExample: (Tokyo, Buenos Aires, San Nicolas)"
+      - name: 'city'
+        in: 'path'
+        description: 'Description: A city name.  \n \nExample: (Tokyo, Buenos Aires, San Nicolas)'
         required: false
-        type: "string"
-      - in: "header"
-        name: "x-forwarded-for"
-        type: "string"
-        description: "Description: the user IP.  \n \nExample: (123.21.54.5)"
+        type: 'string'
+      - in: 'header'
+        name: 'x-forwarded-for'
+        type: 'string'
+        description: 'Description: the user IP.  \n \nExample: (123.21.54.5)'
         required: false
       responses:
         '200':
           description: OK
           schema:
-            $ref: "#/definitions/Response_current_OK"
+            $ref: '#/definitions/Response_current_OK'
         '404':
           description: NOT FOUND
           schema:
-            $ref: "#/definitions/Response_NOK_404"
+            $ref: '#/definitions/Response_NOK_404'
         '500':
           description: Server Error
           schema:
-            $ref: "#/definitions/Response_NOK"
+            $ref: '#/definitions/Response_NOK'
 
   /v1/forecast/{city}:
     get:
-      summary: "Get data from IpApi and OpenWeatherMap API"
+      summary: 'Get data from IpApi and OpenWeatherMap API'
       description: Gets Forecast data of a city (5 Days)
       parameters:
-      - name: "city"
-        in: "path"
-        description: "Description: A city name.  \n \nExample: (Tokyo, Buenos Aires, San Nicolas)"
+      - name: 'city'
+        in: 'path'
+        description: 'Description: A city name.  \n \nExample: (Tokyo, Buenos Aires, San Nicolas)'
         required: false
-        type: "string"
-      - in: "header"
-        name: "x-forwarded-for"
-        type: "string"
-        description: "Description: the user IP.  \n \nExample: (123.21.54.5)"
+        type: 'string'
+      - in: 'header'
+        name: 'x-forwarded-for'
+        type: 'string'
+        description: 'Description: the user IP.  \n \nExample: (123.21.54.5)'
         required: false
       responses:
         '200':
           description: OK
           schema:
-            $ref: "#/definitions/Response_forecast_OK"
+            $ref: '#/definitions/Response_forecast_OK'
         '404':
           description: NOT FOUND
           schema:
-            $ref: "#/definitions/Response_NOK_404"
+            $ref: '#/definitions/Response_NOK_404'
         '500':
           description: Server Error
           schema:
-            $ref: "#/definitions/Response_NOK"
+            $ref: '#/definitions/Response_NOK'
 
 definitions:
   Response_location_OK:
@@ -100,31 +100,31 @@ definitions:
     properties:
       location:
         type: object
-        $ref: "#/definitions/Location"
+        $ref: '#/definitions/Location'
   Response_current_OK:
     type: object
     properties:
       location:
         type: object
-        $ref: "#/definitions/Location"
+        $ref: '#/definitions/Location'
       weather_today:
         type: object
-        $ref: "#/definitions/CurrentWeather"
+        $ref: '#/definitions/CurrentWeather'
   Response_forecast_OK:
     type: object
     properties:
       location:
         type: object
-        $ref: "#/definitions/Location"
+        $ref: '#/definitions/Location'
       weather_forecast:
         type: object
-        $ref: "#/definitions/ForecastWeather"
+        $ref: '#/definitions/ForecastWeather'
   Response_NOK:
     type: object
     properties:
       code:
         type: string
-        example: "error"
+        example: 'error'
       message:
         type: string
   Response_NOK_404:
@@ -132,10 +132,10 @@ definitions:
     properties:
       code:
         type: string
-        example: "error"
+        example: 'error'
       message:
         type: string
-        example: "city not found"
+        example: 'city not found'
 
   Location:
     type: object
@@ -303,9 +303,9 @@ definitions:
       list:
         type: array
         items: 
-          $ref: "#/definitions/Weather_location"
+          $ref: '#/definitions/Weather_location'
       city:
-        $ref: "#/definitions/City"
+        $ref: '#/definitions/City'
 
   Weather_location:
     type: object
