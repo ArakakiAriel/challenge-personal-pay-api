@@ -1,7 +1,3 @@
-//= ==============
-//    PORT
-//= ==============
-process.env.PORT = process.env.PORT || 3000;
 
 //= ==============
 //    ENVIRONMENT
@@ -17,7 +13,6 @@ module.exports = {
     owm: process.env.URL_OWM || 'https://api.openweathermap.org/data/2.5',
   },
   owm: {
-      api_key: process.env.OWM_API_KEY ,
       current: process.env.OWM_CURRENT || 'weather',
       forecast: process.env.OWM_FORECAST || 'forecast'
   },

@@ -11,7 +11,6 @@ module.exports.callOwmApiCurrentByCity = async (req, res, next) => {
 
   try{
     logger.debug('[Calling Weather Controller]');
-    logger.warn(config.owm.api_key);
     let owmApiResponse = await callOwmApiController(config.owm.current, req.lat, req.lon, req.params.city);
     // Set the data as weather_today
     res.data.weather_today = owmApiResponse;

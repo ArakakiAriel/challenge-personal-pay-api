@@ -294,13 +294,7 @@ definitions:
   ForecastWeather:
     type: object
     properties:
-      cod:
-        type: string
-        example: 200
-      message:
-        type: number
-        example: 0
-      list:
+      forecast:
         type: array
         items: 
           $ref: '#/definitions/Weather_location'

@@ -4,6 +4,7 @@ const logger = require('../logger/logger');
 
 
 const OwmApiService = async (type, lat, lon, city) =>{
+    logger.debug('------------ owm-api-service ------------')
     
     try {
         let params = new URLSearchParams();
@@ -12,12 +13,12 @@ const OwmApiService = async (type, lat, lon, city) =>{
         if(city){
             logger.debug(`City: ${city}`);
             params.append('q', city);
-            params.append('appid', config.owm.api_key)
+            params.append('appid', process.env.OWM_API_KEY)
         }else{
             logger.debug(`Lat ${lat} and Lon ${lon}`)
             params.append('lat', lat);
             params.append('lon', lon)
-            params.append('appid', config.owm.api_key)
+            params.append('appid', process.env.OWM_API_KEY)
         }
         
         const getCurrent = {
@@ -26,7 +27,6 @@ const OwmApiService = async (type, lat, lon, city) =>{
             params
         }
 
-        logger.warn(params);
         //Calling API
         const responseAxios = await axios(getCurrent);
         return responseAxios.data;
