@@ -18,10 +18,10 @@ module.exports = {
   log: {
     file: {
       level: 'debug',
-      name: 'app.log'
+      name: 'app.log',
     },
-    console:{
-      level: 'error'
-    }
+    console: {
+      level: 'error',
+    },
   },
 };
