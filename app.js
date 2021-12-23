@@ -34,7 +34,7 @@ app.use('/healthcheck', (req, res) => {
   });
 });
 
-// weather routing
+// weather & forecast routing
 app.use('/v1', weatherRoute);
 
 // Swagger UI
