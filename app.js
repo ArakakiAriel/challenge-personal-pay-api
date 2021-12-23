@@ -1,11 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const YAML = require('yamljs');
+const swaggerUi = require('swagger-ui-express');
 const constants = require('./app/constants/constants');
 const messages = require('./app/constants/messages');
 const logger = require('./app/logger/logger');
-const YAML = require('yamljs');
-const swaggerUi = require('swagger-ui-express');
+require('dotenv').config({ path: '.env' });
 
 const app = express();
 
@@ -37,23 +38,24 @@ app.use('/healthcheck', (req, res) => {
 app.use('/v1', weatherRoute);
 
 // Swagger UI
-const swaggerDocument = YAML.load(`./swagger.yml`);
-app.use(`/api-docs/`,
+const swaggerDocument = YAML.load('./swagger.yml');
+app.use(
+  '/api-docs/',
   swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument)
+  swaggerUi.setup(swaggerDocument),
 );
 
 // 404 - Json formatting for not supported URI
 app.use('*', (req, res) => { // eslint-disable-line
   logger.error(`${constants.NOT_FOUND_ERROR} - ${messages.INVALID_URL}`);
   res.setHeader('Content-Type', 'application/json');
-  // eslint-disable-next-line max-len
+
   res.status(constants.NOT_FOUND_ERROR).send({ code: constants.NOT_FOUND_ERROR, message: messages.INVALID_URL });
 });
 
 // TIMEOUT && DEFAULT ERROR
   app.use((err, req, res, next) => { // eslint-disable-line
-  // eslint-disable-next-line max-len
+
   if (req.timedout) {
     logger.error(`${constants.REQUEST_TIMEOUT} - ${messages.REQUEST_TIMEOUT}`);
     res.status(constants.REQUEST_TIMEOUT).send({

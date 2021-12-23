@@ -1,4 +1,3 @@
-
 //= ==============
 //    ENVIRONMENT
 //= ==============
@@ -13,11 +12,16 @@ module.exports = {
     owm: process.env.URL_OWM || 'https://api.openweathermap.org/data/2.5',
   },
   owm: {
-      current: process.env.OWM_CURRENT || 'weather',
-      forecast: process.env.OWM_FORECAST || 'forecast'
+    current: process.env.OWM_CURRENT || 'weather',
+    forecast: process.env.OWM_FORECAST || 'forecast',
   },
   log: {
-    level: 'debug',
-    file_name: 'app.log',
+    file: {
+      level: 'debug',
+      name: 'app.log'
+    },
+    console:{
+      level: 'error'
+    }
   },
 };

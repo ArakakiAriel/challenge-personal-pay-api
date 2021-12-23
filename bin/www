@@ -1,9 +1,8 @@
-const app = require('../app');
 const http = require('http');
 const displayRoutes = require('express-routemap');
+const app = require('../app');
 const logger = require('../app/logger/logger');
 const config = require('../app/config/config');
-require('dotenv').config({path: '.env'});
 
 /**
  * Create HTTP server.
@@ -23,7 +22,6 @@ app.listen(process.env.PORT, () => {
   displayRoutes(app);
 });
 
-exports.closeServer = function () {
+exports.closeServer = () => {
   server.close();
 };
-

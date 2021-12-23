@@ -14,11 +14,11 @@ module.exports.callIpApi = async (req, res, next) => {
   // Custom message while missing the x-forwarded-for header running in localhost
   if (ip === '::1') {
     logger.warn(`${constants.BAD_REQUEST_ERROR} - ${messages.FORWARDED_HEADER_MISSING}`);
-    // eslint-disable-next-line max-len
+
     return setResponseWithError(res, constants.BAD_REQUEST_ERROR, messages.FORWARDED_HEADER_MISSING);
   }
 
-  logger.debug(`USER IP:${ip}`);
+  logger.silly(`USER IP:${ip}`);
   logger.debug('[Calling ipapi service by user IP]');
   // We use axios to make the call to the external api IpApi.
   const axiosResponse = await axios.get(`${config.url.ipapi}/${ip}`)
