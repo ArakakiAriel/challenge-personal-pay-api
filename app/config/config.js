@@ -21,7 +21,7 @@ module.exports = {
       name: 'app.log',
     },
     console: {
-      level: 'error',
+      level: 'warn',
     },
   },
 };

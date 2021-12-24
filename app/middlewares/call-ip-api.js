@@ -4,6 +4,7 @@ const messages = require('../constants/messages');
 const config = require('../config/config');
 const { setResponseWithError } = require('../utils/common-response');
 const logger = require('../logger/logger');
+const {locationController} = require('../controller/location-controller');
 
 // This class handle the call of IpApi and store the result in res.data.location
 module.exports.callIpApi = async (req, res, next) => {
@@ -18,29 +19,24 @@ module.exports.callIpApi = async (req, res, next) => {
     return setResponseWithError(res, constants.BAD_REQUEST_ERROR, messages.FORWARDED_HEADER_MISSING);
   }
 
-  logger.silly(`USER IP:${ip}`);
-  logger.debug('[Calling ipapi service by user IP]');
-  // We use axios to make the call to the external api IpApi.
-  const axiosResponse = await axios.get(`${config.url.ipapi}/${ip}`)
-    .then((response) => {
-      if ((response.data.status) === 'fail') {
-        logger.warn(`${constants.BAD_REQUEST_ERROR} - ${response.data.message}`);
-        return setResponseWithError(res, constants.BAD_REQUEST_ERROR, response.data.message);
-      }
+  try{
+    const ipApiResponse = await locationController(ip);
+    if ((ipApiResponse.status) === 'fail') {
+      logger.warn(`${constants.BAD_REQUEST_ERROR} - ${ipApiResponse.message}`);
+      return setResponseWithError(res, constants.BAD_REQUEST_ERROR, ipApiResponse.message);
+    }
 
-      logger.debug(`IPAPI response: ${JSON.stringify(response.data)}`);
-      return response.data;
-    }).catch((error) => {
-      logger.error(error);
-      return setResponseWithError(res, error.response.status, error.response.data.message);
-    });
+    req.lat = ipApiResponse.lat;
+    req.lon = ipApiResponse.lon;
 
-  res.data = {
-    location: axiosResponse,
-  };
-
-  req.lat = axiosResponse.lat;
-  req.lon = axiosResponse.lon;
-
+    logger.debug(`IPAPI response: ${JSON.stringify(ipApiResponse)}`);
+    res.data ={
+      location: ipApiResponse
+    }
+  }catch(e){
+    logger.error(error);
+    return setResponseWithError(res, error.response.status, error.response.data.message);
+  }
+  
   return next();
 };

@@ -1,6 +1,7 @@
 const request = require('supertest');
 const app = require('../app');
 const should = require('should');
+const logger = require('../app/logger/logger');
 
 describe('GET /v1/location', () => {
     /**
@@ -14,6 +15,7 @@ describe('GET /v1/location', () => {
             .expect(200)
             .end((err, res) => {
                 res.status.should.equal(200);
+                logger.warn(res.text)
                 JSON.parse(res.text).location.status.should.equal('success');
                 if(err) return done(err);
                 return done();
@@ -51,7 +53,7 @@ describe('GET /v1/current', () => {
      */
     it('respond with json containing the user location data by ipapi and city current weather info by openWeatherMap api', (done) => {
         request(app)
-            .get('/v1/current/tokyo')
+            .get('/v1/current/buenos%20aires')
             .set('x-forwarded-for', '123.21.54.5')
             .expect('Content-Type', /json/)
             .expect(200, done);

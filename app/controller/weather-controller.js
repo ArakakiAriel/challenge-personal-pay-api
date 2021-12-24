@@ -9,7 +9,7 @@ const logger = require('../logger/logger');
  * @param {*} lon Longitude
  * @param {*} city optional value
  */
-const callOwmApiController = async (type, lat, lon, city) => {
+const weatherController = async (type, lat, lon, city) => {
   logger.debug('------------ weather-controller ------------');
   const serviceResponse = await OwmApiService(type, lat, lon, city);
 
@@ -25,5 +25,5 @@ const callOwmApiController = async (type, lat, lon, city) => {
 };
 
 module.exports = {
-  callOwmApiController,
+  weatherController,
 };

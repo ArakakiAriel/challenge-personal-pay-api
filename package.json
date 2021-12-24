@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "test": "mocha test/app.test.js -t 5000 --exit",
+    "test": "mocha test/app.test.js -t 9000 --exit",
     "eslint": "eslint app.js   ./app/*   ./bin/*",
     "eslint-fix": "eslint app.js   ./app/*   ./bin/* --fix"
   },
