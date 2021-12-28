@@ -17,11 +17,11 @@ module.exports = {
   },
   log: {
     file: {
-      level: 'debug',
-      name: 'app.log',
+      level: process.env.LOG_FILE_LEVEL || 'debug',
+      name: process.env.LOG_FILE_NAME || 'app.log',
     },
     console: {
-      level: 'warn',
+      level: process.env.LOG_CONSOLE_LEVEL || 'warn',
     },
   },
 };

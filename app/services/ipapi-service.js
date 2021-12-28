@@ -8,7 +8,7 @@ const ipapiService = async (ip) => {
   try {
     const getLocation = {
       method: 'get',
-      url: `${config.url.ipapi}/${ip}`
+      url: `${config.url.ipapi}/${ip}`,
     };
 
     logger.silly(`USER IP:${ip}`);
@@ -24,5 +24,5 @@ const ipapiService = async (ip) => {
 };
 
 module.exports = {
-    ipapiService
+  ipapiService,
 };

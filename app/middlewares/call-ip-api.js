@@ -1,10 +1,8 @@
-const axios = require('axios');
 const constants = require('../constants/constants');
 const messages = require('../constants/messages');
-const config = require('../config/config');
 const { setResponseWithError } = require('../utils/common-response');
 const logger = require('../logger/logger');
-const {locationController} = require('../controller/location-controller');
+const { locationController } = require('../controller/location-controller');
 
 // This class handle the call of IpApi and store the result in res.data.location
 module.exports.callIpApi = async (req, res, next) => {
@@ -19,7 +17,7 @@ module.exports.callIpApi = async (req, res, next) => {
     return setResponseWithError(res, constants.BAD_REQUEST_ERROR, messages.FORWARDED_HEADER_MISSING);
   }
 
-  try{
+  try {
     const ipApiResponse = await locationController(ip);
     if ((ipApiResponse.status) === 'fail') {
       logger.warn(`${constants.BAD_REQUEST_ERROR} - ${ipApiResponse.message}`);
@@ -30,13 +28,13 @@ module.exports.callIpApi = async (req, res, next) => {
     req.lon = ipApiResponse.lon;
 
     logger.debug(`IPAPI response: ${JSON.stringify(ipApiResponse)}`);
-    res.data ={
-      location: ipApiResponse
-    }
-  }catch(e){
+    res.data = {
+      location: ipApiResponse,
+    };
+  } catch (error) {
     logger.error(error);
     return setResponseWithError(res, error.response.status, error.response.data.message);
   }
-  
+
   return next();
 };
