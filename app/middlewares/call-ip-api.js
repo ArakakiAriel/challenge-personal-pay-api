@@ -10,6 +10,7 @@ module.exports.callIpApi = async (req, res, next) => {
   // We identify the original IP address of the client
   const ip = (req.headers['x-forwarded-for']?req.headers['x-forwarded-for']:req.socket.remoteAddress);
   
+  logger.debug(`The ip is: ${ip}`);
   // Custom message while missing the x-forwarded-for header running in localhost
   if (ip === '::1') {
     logger.warn(`${constants.BAD_REQUEST_ERROR} - ${messages.FORWARDED_HEADER_MISSING}`);
