@@ -47,10 +47,5 @@
     "nodemon": "^2.0.15",
     "should": "^13.2.3",
     "supertest": "^6.1.6"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run eslint"
-    }
   }
 }

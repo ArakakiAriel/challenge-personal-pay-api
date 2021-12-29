@@ -1,9 +1,8 @@
+
+
+
 const logger = require('../logger/logger');
 const messages = require('../constants/messages');
-
-
-
-
 
 // Formatting of the error message shown as result
 function setResponseWithError(res, status, message, code = messages.RESPONSE_NOK_STATUS_MESSAGE) {
