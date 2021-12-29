@@ -12,6 +12,7 @@ module.exports.callIpApi = async (req, res, next) => {
 
   let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
+  logger.silly(`IP before formatting: ${ip}`);
   ip = getMostRecentIp(ip);
 
   // Custom message while missing the x-forwarded-for header running in localhost
