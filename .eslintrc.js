@@ -12,6 +12,8 @@ module.exports = {
   },
   rules: {
     'no-plusplus': 'off',
-    'max-len': 'off'
+    'max-len': 'off',
+    'prefer-destructuring': ['error', {'object': true, 'array': false}]
+
   },
 };

@@ -3,7 +3,7 @@ const messages = require('../constants/messages');
 const { setResponseWithError } = require('../utils/common-response');
 const logger = require('../logger/logger');
 const { locationController } = require('../controller/location-controller');
-const { getMostRecentIp } = require('../utils/utils');
+const { getIpByHeader } = require('../utils/utils');
 
 // This class handle the call of IpApi and store the result in res.data.location
 module.exports.callIpApi = async (req, res, next) => {
@@ -13,7 +13,7 @@ module.exports.callIpApi = async (req, res, next) => {
   let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
   logger.silly(`IP before formatting: ${ip}`);
-  ip = getMostRecentIp(ip);
+  ip = getIpByHeader(ip);
 
   // Custom message while missing the x-forwarded-for header running in localhost
   if (ip === '::1') {
