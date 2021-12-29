@@ -8,9 +8,11 @@ const { locationController } = require('../controller/location-controller');
 module.exports.callIpApi = async (req, res, next) => {
   logger.debug('------------ call-ip-api ------------');
   // We identify the original IP address of the client
-  const ip = (req.headers['x-forwarded-for']?req.headers['x-forwarded-for']:req.socket.remoteAddress);
+  let ip = (req.headers['x-forwarded-for']?req.headers['x-forwarded-for']:req.socket.remoteAddress);
   
-  logger.debug(`The ip is: ${ip}`);
+  if(ip?.length > 1){
+    ip = ip[2];
+  }
   // Custom message while missing the x-forwarded-for header running in localhost
   if (ip === '::1') {
     logger.warn(`${constants.BAD_REQUEST_ERROR} - ${messages.FORWARDED_HEADER_MISSING}`);
