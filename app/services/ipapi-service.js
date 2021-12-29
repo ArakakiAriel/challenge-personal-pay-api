@@ -4,6 +4,7 @@ const logger = require('../logger/logger');
 
 const ipapiService = async (ip) => {
   logger.debug('------------ ipapi-service ------------');
+  logger.silly(`IP: ${ip}`);
 
   try {
     const getLocation = {

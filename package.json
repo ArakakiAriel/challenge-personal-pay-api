@@ -8,6 +8,7 @@
     "dev": "nodemon ./bin/www",
     "test": "mocha test/app.test.js -t 9000 --exit",
     "eslint": "eslint app.js   ./app/*   ./bin/*",
+    "pre-commit": "npm eslintgit add .",
     "eslint-fix": "eslint app.js   ./app/*   ./bin/* --fix"
   },
   "repository": {

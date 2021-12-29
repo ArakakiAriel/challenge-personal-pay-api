@@ -1,12 +1,13 @@
+const logger = require("../logger/logger");
+
 /**
  * Function to convert the x-fowarded-for value to an array
  * @param {*} arr String to convert to array
  * @returns
  */
 const stringToArray = (arr) => {
-  arr.replace(/ /g, '');
-  arr.split(',');
-  return arr;
+  arr = arr.replace(/ /g, '');
+  return arr.split(',');
 };
 
 /**
@@ -16,7 +17,8 @@ const stringToArray = (arr) => {
  */
 const getMostRecentIp = (ip) => {
   if (ip.includes(',')) {
-    return stringToArray(ip).at(-1);
+    ip = stringToArray(ip)[1];
+    
   }
   return ip;
 };

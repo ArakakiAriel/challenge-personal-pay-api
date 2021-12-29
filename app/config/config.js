@@ -21,7 +21,7 @@ module.exports = {
       name: process.env.LOG_FILE_NAME || 'app.log',
     },
     console: {
-      level: process.env.LOG_CONSOLE_LEVEL || 'warn',
+      level: process.env.LOG_CONSOLE_LEVEL || 'silly',
     },
   },
 };
