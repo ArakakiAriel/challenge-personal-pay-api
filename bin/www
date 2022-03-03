@@ -1,0 +1,27 @@
+const http = require('http');
+const displayRoutes = require('express-routemap');
+const app = require('../app');
+const logger = require('../app/logger/logger');
+const config = require('../app/config/config');
+
+/**
+ * Create HTTP server.
+ */
+
+const server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+app.listen(process.env.PORT, () => {
+  logger.info('//////////////////////////////////////');
+  logger.info('//       INITIALIZING SERVICE       //');
+  logger.info('//////////////////////////////////////');
+  logger.info(`Listening on port ${process.env.PORT}`);
+  logger.info(`LOG LEVEL: ${config.log.level}`);
+  displayRoutes(app);
+});
+
+exports.closeServer = () => {
+  server.close();
+};

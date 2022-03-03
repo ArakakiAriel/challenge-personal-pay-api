@@ -1,0 +1,424 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: challenge-personal-pay-api
+  description: weather and forecast API
+host: challenge-personal-pay-api.herokuapp.com
+schemes:
+- 'http'
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /v1/location:
+    get:
+      summary: 'Get the location data of the user by calling IpApi'
+      description: Returns location data
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: x-forwarded-for
+        type: string
+        description: 'Description: the user IP.  \n \nExample: (123.21.54.5)'
+        required: false
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Response_location_OK'
+        '400':
+          description: INVALID QUERY
+          schema:
+            $ref: '#/definitions/Response_NOK'
+        '500':
+          description: SERVER ERROR
+          schema:
+            $ref: '#/definitions/Response_NOK'
+
+  /v1/current/{city}:
+    get:
+      summary: 'Get data from IpApi and OpenWeatherMap API'
+      description: Gets current weather of a city
+      parameters:
+      - name: 'city'
+        in: 'path'
+        description: 'Description: A city name.  \n \nExample: (Tokyo, Buenos Aires, San Nicolas)'
+        required: false
+        type: 'string'
+      - in: 'header'
+        name: 'x-forwarded-for'
+        type: 'string'
+        description: 'Description: the user IP.  \n \nExample: (123.21.54.5)'
+        required: false
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Response_current_OK'
+        '404':
+          description: NOT FOUND
+          schema:
+            $ref: '#/definitions/Response_NOK_404'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/Response_NOK'
+
+  /v1/forecast/{city}:
+    get:
+      summary: 'Get data from IpApi and OpenWeatherMap API'
+      description: Gets Forecast data of a city (5 Days)
+      parameters:
+      - name: 'city'
+        in: 'path'
+        description: 'Description: A city name.  \n \nExample: (Tokyo, Buenos Aires, San Nicolas)'
+        required: false
+        type: 'string'
+      - in: 'header'
+        name: 'x-forwarded-for'
+        type: 'string'
+        description: 'Description: the user IP.  \n \nExample: (123.21.54.5)'
+        required: false
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Response_forecast_OK'
+        '404':
+          description: NOT FOUND
+          schema:
+            $ref: '#/definitions/Response_NOK_404'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/Response_NOK'
+
+definitions:
+  Response_location_OK:
+    type: object
+    properties:
+      location:
+        type: object
+        $ref: '#/definitions/Location'
+  Response_current_OK:
+    type: object
+    properties:
+      location:
+        type: object
+        $ref: '#/definitions/Location'
+      weather_today:
+        type: object
+        $ref: '#/definitions/CurrentWeather'
+  Response_forecast_OK:
+    type: object
+    properties:
+      location:
+        type: object
+        $ref: '#/definitions/Location'
+      weather_forecast:
+        type: object
+        $ref: '#/definitions/ForecastWeather'
+  Response_NOK:
+    type: object
+    properties:
+      code:
+        type: string
+        example: 'error'
+      message:
+        type: string
+  Response_NOK_404:
+    type: object
+    properties:
+      code:
+        type: string
+        example: 'error'
+      message:
+        type: string
+        example: 'city not found'
+
+  Location:
+    type: object
+    properties:
+      status:
+        type: string
+        example: 'success'
+      country:
+        type: string
+        example: 'Vietnam'
+      countryCode:
+        type: string
+        example: 'VN'
+      region:
+        type: string
+        example: 'SG'
+      regionName:
+        type: string
+        example: 'Ho Chi Minh'
+      city:
+        type: string
+        example: 'Ho Chi Minh City'
+      zip:
+        type: string
+        example: '1234'
+      lat:
+        type: number
+        example: 10.8326
+      lon:
+        type: number
+        example: 106.6581
+      timezone:
+        type: string
+        example: 'Asia/Ho_Chi_Minh'
+      isp:
+        type: string
+        example: 'VietNam Post and Telecom Corporation'
+      org:
+        type: string
+        example: 'Vietnam Posts and Telecommunications Group'
+      as:
+        type: string
+        example: 'AS45899 VNPT Corp'
+      query:
+        type: string
+        example: '123.21.54.5'
+
+  CurrentWeather:
+    type: object
+    properties:
+      coord: 
+        type: object
+        properties: 
+          lon: 
+            type: number
+            example: -74.172
+          lat: 
+            type: number
+            example: 40.7369
+      weather: 
+        type: array
+        items: 
+          type: object
+          properties: 
+            id: 
+              type: number
+              example: 701
+            main: 
+              type: string
+              example: Mist
+            description: 
+              type: string
+              example: mist
+            icon: 
+              type: string
+              example: 50n
+      base: 
+        type: string
+        example: stations
+      main: 
+        type: object
+        properties: 
+          temp: 
+            type: number
+            example: 277.13
+          feels_like: 
+            type: number
+            example: 277.13
+          temp_min: 
+            type: number
+            example: 274.87
+          temp_max: 
+            type: number
+            example: 278.7
+          pressure: 
+            type: number
+            example: 1003
+          humidity: 
+            type: number
+            example: 92
+      visibility: 
+        type: number
+        example: 10000
+      wind: 
+        type: object
+        properties: 
+          speed: 
+            type: number
+            example: 0.45
+          deg: 
+            type: number
+            example: 282
+          gust: 
+            type: number
+            example: 0.89
+      clouds: 
+        type: object
+        properties: 
+          all: 
+            type: number
+            example: 90
+      dt: 
+        type: number
+        example: 1640174103
+      sys: 
+        type: object
+        properties: 
+          type: 
+            type: number
+            example: 2
+          id: 
+            type: number
+            example: 2003689
+          country: 
+            type: string
+            example: US
+          sunrise: 
+            type: number
+            example: 1640175477
+          sunset: 
+            type: number
+            example: 1640208768
+      timezone: 
+        type: number
+        example: -18000
+      id: 
+        type: number
+        example: 5101798
+      name: 
+        type: string
+        example: Newark
+      cod: 
+        type: number
+        example: 200
+        
+  ForecastWeather:
+    type: object
+    properties:
+      forecast:
+        type: array
+        items: 
+          $ref: '#/definitions/Weather_location'
+      city:
+        $ref: '#/definitions/City'
+
+  Weather_location:
+    type: object
+    properties:
+      dt: 
+        type: number
+        example: 1640131200
+      main: 
+        type: object
+        properties: 
+          temp: 
+            type: number
+            example: 281.56
+          feels_like: 
+            type: number
+            example: 278.64
+          temp_min: 
+            type: number
+            example: 281.56
+          temp_max: 
+            type: number
+            example: 282.32
+          pressure: 
+            type: number
+            example: 1012
+          sea_level: 
+            type: number
+            example: 1012
+          grnd_level: 
+            type: number
+            example: 1009
+          humidity: 
+            type: number
+            example: 58
+          temp_kf: 
+            type: number
+            example: -0.76
+      weather: 
+        type: array
+        items: 
+          type: object
+          properties: 
+            id: 
+              type: number
+              example: 801
+            main: 
+              type: string
+              example: Clouds
+            description: 
+              type: string
+              example: few clouds
+            icon: 
+              type: string
+              example: 02d
+      clouds: 
+        type: object
+        properties: 
+          all: 
+            type: number
+            example: 20
+      wind: 
+        type: object
+        properties: 
+          speed: 
+            type: number
+            example: 5.27
+          deg: 
+            type: number
+            example: 1
+          gust: 
+            type: number
+            example: 8.28
+      visibility: 
+        type: number
+        example: 10000
+      pop: 
+        type: number
+        example: 0
+      sys: 
+        type: object
+        properties: 
+          pod: 
+            type: string
+            example: d
+      dt_txt: 
+        type: string
+        example: 2021-12-22 00:00:00
+
+  City:
+    type: object
+    properties:
+      id: 
+        type: number
+        example: 1850144
+      name: 
+        type: string
+        example: Tokyo
+      coord: 
+        type: object
+        properties: 
+          lat: 
+            type: number
+            example: 35.6895
+          lon: 
+            type: number
+            example: 139.6917
+      country: 
+        type: string
+        example: JP
+      population: 
+        type: number
+        example: 12445327
+      timezone: 
+        type: number
+        example: 32400
+      sunrise: 
+        type: number
+        example: 1640123253
+      sunset: 
+        type: number
+        example: 1640158304

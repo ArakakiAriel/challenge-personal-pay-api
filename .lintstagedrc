@@ -1,0 +1,7 @@
+# .lintstagedrc
+
+{
+  "./app/*   ./bin/*": [
+    "eslint --max-warnings=0"
+  ]
+}
